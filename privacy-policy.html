@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID — 개인정보 처리방침</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060608;
+    --surface: #0d0d12;
+    --border: #1a1a28;
+    --accent: #7b61ff;
+    --accent2: #ff4466;
+    --text: #e8e6f0;
+    --muted: #6b6880;
+    --subtle: #2a2840;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,97,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,97,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.25;
+  }
+  .orb-1 { width: 400px; height: 400px; background: var(--accent); top: -100px; right: -100px; animation: drift 12s ease-in-out infinite; }
+  .orb-2 { width: 300px; height: 300px; background: var(--accent2); bottom: 10%; left: -80px; animation: drift 16s ease-in-out infinite reverse; }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 20px); }
+  }
+
+  /* Layout */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+
+  .game-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(123,97,255,0.1);
+    border: 1px solid rgba(123,97,255,0.3);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* Safe badge */
+  .safe-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    background: rgba(0,220,130,0.08);
+    border: 1px solid rgba(0,220,130,0.25);
+    border-radius: 4px;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: #00dc82;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .safe-badge::before {
+    content: '●';
+    font-size: 8px;
+    animation: pulse-green 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 48px;
+    padding: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  section:hover {
+    border-color: var(--subtle);
+  }
+
+  section::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    font-family: 'Space Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(123,97,255,0.07);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    margin: 24px 0 12px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    font-size: 15px;
+    color: #b8b4cc;
+    line-height: 1.85;
+    margin-bottom: 12px;
+  }
+
+  /* Status grid */
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 13px;
+    color: #b8b4cc;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-red { background: var(--accent2); box-shadow: 0 0 6px var(--accent2); }
+  .dot-green { background: #00dc82; box-shadow: 0 0 6px #00dc82; }
+
+  /* List */
+  ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+    color: #b8b4cc;
+  }
+
+  ul li:last-child { border-bottom: none; }
+
+  ul li::before {
+    content: '—';
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Permissions table */
+  .perm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .perm-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: rgba(123,97,255,0.08);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .perm-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #b8b4cc;
+    vertical-align: middle;
+  }
+
+  .perm-table tr:last-child td { border-bottom: none; }
+
+  .none-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    color: #00dc82;
+    background: rgba(0,220,130,0.08);
+    border: 1px solid rgba(0,220,130,0.2);
+    padding: 2px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  /* Highlight box */
+  .highlight {
+    background: rgba(123,97,255,0.06);
+    border: 1px solid rgba(123,97,255,0.2);
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #c4bff0;
+  }
+
+  /* Contact */
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+  }
+
+  .contact-label {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .contact-value {
+    color: var(--accent);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 12px;
+  }
+
+  .footer-game {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .container > * {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  header { animation-delay: 0s; }
+  section:nth-of-type(1) { animation-delay: 0.05s; }
+  section:nth-of-type(2) { animation-delay: 0.1s; }
+  section:nth-of-type(3) { animation-delay: 0.15s; }
+  section:nth-of-type(4) { animation-delay: 0.2s; }
+  section:nth-of-type(5) { animation-delay: 0.25s; }
+  section:nth-of-type(6) { animation-delay: 0.3s; }
+  section:nth-of-type(7) { animation-delay: 0.35s; }
+  footer { animation-delay: 0.4s; }
+
+  @media (max-width: 600px) {
+    section { padding: 24px 20px; }
+    section::before { display: none; }
+    .status-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="container">
+  <header>
+    <div class="game-tag">VOID GAME</div>
+    <h1>개인정보<br><span>처리방침</span></h1>
+    <div class="subtitle">Privacy Policy · 2025</div>
+    <div class="safe-badge">개인정보 수집 없음 — 완전 안전 앱</div>
+  </header>
+
+  <section data-num="01">
+    <h2>개요</h2>
+    <p>VOID는 사용자의 개인정보를 일체 수집하지 않는 완전 오프라인 게임입니다. 이 방침은 앱이 데이터를 어떻게 처리하는지 투명하게 안내합니다.</p>
+    <div class="status-grid">
+      <div class="status-item"><span class="dot dot-red"></span>개인정보 수집</div>
+      <div class="status-item"><span class="dot dot-red"></span>서버 전송</div>
+      <div class="status-item"><span class="dot dot-red"></span>쿠키 / 스토리지</div>
+      <div class="status-item"><span class="dot dot-red"></span>광고 추적</div>
+      <div class="status-item"><span class="dot dot-green"></span>오프라인 실행</div>
+      <div class="status-item"><span class="dot dot-green"></span>완전 안전</div>
+    </div>
+  </section>
+
+  <section data-num="02">
+    <h2>수집하는 정보</h2>
+    <h3>// 수집하지 않는 정보</h3>
+    <ul>
+      <li>이름, 이메일, 전화번호 등 개인 식별 정보</li>
+      <li>GPS, IP 기반 위치 정보</li>
+      <li>기기 고유 식별자 (IMEI, 광고 ID 등)</li>
+      <li>연락처, 사진, 파일 등 기기 내 데이터</li>
+      <li>계정 정보 또는 로그인 데이터</li>
+      <li>결제 또는 금융 정보</li>
+    </ul>
+    <h3>// 임시 메모리 데이터 (앱 내부만)</h3>
+    <ul>
+      <li>현재 게임 점수 — 세션 종료 시 자동 삭제</li>
+      <li>최고 점수 — 앱 실행 중에만 유지, 종료 시 초기화</li>
+    </ul>
+    <div class="highlight">이 데이터는 기기 메모리에만 존재하며, 외부로 전송되거나 저장되지 않습니다.</div>
+  </section>
+
+  <section data-num="03">
+    <h2>데이터 사용 방식</h2>
+    <ul>
+      <li>사용자 데이터를 제3자와 공유하지 않습니다</li>
+      <li>광고 목적으로 데이터를 사용하지 않습니다</li>
+      <li>서버 또는 외부 시스템으로 데이터를 전송하지 않습니다</li>
+      <li>사용자 행동을 추적하거나 분석하지 않습니다</li>
+    </ul>
+  </section>
+
+  <section data-num="04">
+    <h2>앱 권한</h2>
+    <p>본 앱이 요청하는 기기 권한 목록입니다:</p>
+    <table class="perm-table">
+      <thead>
+        <tr>
+          <th>권한</th>
+          <th>상태</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>인터넷 접근</td><td><span class="none-tag">없음</span></td></tr>
+        <tr><td>위치 정보</td><td><span class="none-tag">없음</span></td></tr>
+        <tr><td>카메라 / 마이크</td><td><span class="none-tag">없음</span></td></tr>
+        <tr><td>저장소 접근</td><td><span class="none-tag">없음</span></td></tr>
+        <tr><td>연락처 / 전화</td><td><span class="none-tag">없음</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section data-num="05">
+    <h2>제3자 서비스</h2>
+    <p>본 앱은 아래 서비스를 포함하지 않습니다:</p>
+    <ul>
+      <li>Google Analytics, Firebase 등 분석 도구</li>
+      <li>광고 네트워크 또는 광고 SDK</li>
+      <li>소셜 미디어 연동 (Facebook, Kakao 등)</li>
+      <li>외부 API 호출 또는 네트워크 요청</li>
+    </ul>
+    <div class="highlight">앱은 완전히 오프라인으로 작동하며 인터넷 연결이 필요하지 않습니다.</div>
+  </section>
+
+  <section data-num="06">
+    <h2>아동 개인정보 보호</h2>
+    <p>본 앱은 만 13세 미만 아동을 포함한 모든 연령대가 이용할 수 있는 게임입니다. 아동의 개인정보를 포함하여 어떠한 사용자 데이터도 의도적으로 수집하지 않습니다.</p>
+    <p>만약 아동으로부터 개인정보가 수집되었다고 판단되면 즉시 삭제 조치합니다.</p>
+  </section>
+
+  <section data-num="07">
+    <h2>문의</h2>
+    <p>개인정보 처리방침에 관한 문의사항이 있으시면 아래로 연락해 주시기 바랍니다:</p>
+    <div class="contact-line">
+      <span class="contact-label">EMAIL</span>
+      <span class="contact-value">your@email.com</span>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted);">※ 이메일 주소를 실제 개발자 연락처로 교체해 주세요.</p>
+  </section>
+
+  <footer>
+    <span class="footer-game">VOID — 개인정보 처리방침</span>
+    <span class="footer-date">시행일: 2025년 1월 1일</span>
+  </footer>
+</div>
+</body>
+</html>
