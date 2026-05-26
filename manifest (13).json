@@ -1,0 +1,14 @@
+{
+  "background_color": "#ffffff",
+  "dir": "auto",
+  "display": "standalone",
+  "name": "voidspace0.netlify",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "voidspace0.netlify",
+  "start_url": "https://voidspace0.netlify.app/",
+  "theme_color": "#ffffff",
+  "categories": [
+    "entertainment"
+  ]
+}
